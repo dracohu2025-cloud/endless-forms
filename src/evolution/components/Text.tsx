@@ -89,12 +89,14 @@ export const Captions: React.FC = () => {
         const e = easeOut(progress(f, c.from, 26));
         return (
           <div key={c.tag} style={{ position: "absolute", left: 0, width: W, top: c.y ?? 318, textAlign: "center", opacity: o, color: "#f4fdff" }}>
-            <div style={{ fontFamily: MONO, fontSize: 18, letterSpacing: "0.45em", paddingLeft: "0.45em", color: "rgba(160,240,255,0.85)",
+            <div style={{ position: "absolute", left: 90, right: 90, top: -50, height: 290,
+              background: "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,4,10,0.5) 0%, rgba(0,4,10,0.28) 55%, rgba(0,0,0,0) 100%)" }} />
+            <div style={{ position: "relative", fontFamily: MONO, fontSize: 18, letterSpacing: "0.45em", paddingLeft: "0.45em", color: "rgba(160,240,255,0.85)",
               transform: `translateY(${(1 - e) * 10}px)` }}>{c.tag}</div>
-            <div style={{ marginTop: 14, fontFamily: SANS, fontWeight: 700, fontSize: c.size ?? 74, letterSpacing: `${0.12 + 0.2 * (1 - e)}em`,
+            <div style={{ position: "relative", marginTop: 14, fontFamily: SANS, fontWeight: 700, fontSize: c.size ?? 74, letterSpacing: `${0.12 + 0.2 * (1 - e)}em`,
               paddingLeft: "0.12em", lineHeight: 1.1, textShadow: "0 0 30px rgba(110,230,255,0.45), 0 2px 18px rgba(0,0,0,0.6)",
               filter: `blur(${(1 - e) * 8}px)` }}>{c.title}</div>
-            <div style={{ marginTop: 16, fontFamily: SANS, fontWeight: 300, fontSize: 32, letterSpacing: "0.12em", paddingLeft: "0.12em",
+            <div style={{ position: "relative", marginTop: 16, fontFamily: SANS, fontWeight: 300, fontSize: 32, letterSpacing: "0.12em", paddingLeft: "0.12em",
               opacity: easeOut(progress(f, c.from + 10, 24)), textShadow: "0 2px 14px rgba(0,0,0,0.7)" }}>{c.sub}</div>
           </div>
         );
