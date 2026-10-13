@@ -2,7 +2,7 @@
   "name": "europa-civilization-video",
   "version": "1.0.0",
   "private": true,
-  "description": "A 9:16 cinematic short on the history of European civilization — visuals and soundtrack generated entirely by code.",
+  "description": "A 9:16 cinematic short on the history of European civilization \u2014 visuals and soundtrack generated entirely by code.",
   "scripts": {
     "music": "python3 music/compose.py",
     "dev": "remotion studio src/index.ts --port 4317",
@@ -10,7 +10,9 @@
     "still": "remotion still src/index.ts Europa out/still.png",
     "cover": "remotion still src/index.ts Cover-3x4 out/cover_3x4.png && remotion still src/index.ts Cover-9x16 out/cover_9x16.png",
     "build": "npm run music && npm run render",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "music:evo": "python3 music/evolution.py",
+    "render:evo": "remotion render src/index.ts Evolution out/evolution.mp4 --codec h264 --crf 18 --concurrency 3"
   },
   "dependencies": {
     "@remotion/cli": "4.0.535",
