@@ -35,7 +35,10 @@ pip install numpy scipy fonttools brotli matplotlib
 npm run music        # 合成配乐 → public/bgm.wav + src/data/audio.json
 npm run dev          # Remotion Studio 预览：http://localhost:4317
 npm run render       # 导出 out/europa.mp4（1080×1920, 30fps, H.264 + AAC）
+npm run cover        # 导出封面 out/cover_3x4.png（1080×1440）和 out/cover_9x16.png（1080×1920）
 ```
+
+封面（`src/Cover.tsx`）同样没有任何图片素材：九扇哥特拱窗里是用 `<Freeze>` 把正片各章节冻结在某一帧后实时渲染的画面。
 
 可选的数据预处理（结果已提交在仓库中，一般无需重跑）：
 
@@ -50,6 +53,7 @@ node scripts/stills.mjs 120 900 2400   # 渲染指定帧的静帧到 out/stills/
 ```
 music/compose.py        程序化作曲与混音（合成器、混响、母带处理）
 src/Europa.tsx          主合成：音轨 + 场景序列 + 全局叠加层
+src/Cover.tsx           社交平台封面（3:4 与 9:16）
 src/timeline.ts         小节/帧换算与段落表
 src/scenes/*.tsx        十个场景
 src/components/         标题排版、粒子、时间轴、胶片颗粒、闪白、镜头容器

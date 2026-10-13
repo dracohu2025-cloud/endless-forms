@@ -8,6 +8,7 @@
     "dev": "remotion studio src/index.ts --port 4317",
     "render": "remotion render src/index.ts Europa out/europa.mp4 --codec h264 --crf 18 --concurrency 3",
     "still": "remotion still src/index.ts Europa out/still.png",
+    "cover": "remotion still src/index.ts Cover-3x4 out/cover_3x4.png && remotion still src/index.ts Cover-9x16 out/cover_9x16.png",
     "build": "npm run music && npm run render",
     "typecheck": "tsc --noEmit"
   },
