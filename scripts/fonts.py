@@ -22,6 +22,9 @@ FONTS = {
     "NotoSerifSC.ttf": GF + "notoserifsc/NotoSerifSC%5Bwght%5D.ttf",
     "Cinzel.ttf": GF + "cinzel/Cinzel%5Bwght%5D.ttf",
     "CormorantGaramond.ttf": GF + "cormorantgaramond/CormorantGaramond%5Bwght%5D.ttf",
+    "NotoSansSC.ttf": GF + "notosanssc/NotoSansSC%5Bwght%5D.ttf",
+    "Unbounded.ttf": GF + "unbounded/Unbounded%5Bwght%5D.ttf",
+    "JetBrainsMono.ttf": GF + "jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf",
 }
 
 
@@ -73,6 +76,9 @@ def main():
     build("NotoSerifSC.ttf", "NotoSerifSC-subset.woff2", text)
     build("Cinzel.ttf", "Cinzel.woff2")
     build("CormorantGaramond.ttf", "CormorantGaramond.woff2")
+    build("NotoSansSC.ttf", "NotoSansSC-subset.woff2", text)
+    build("Unbounded.ttf", "Unbounded.woff2")
+    build("JetBrainsMono.ttf", "JetBrainsMono.woff2")
 
 
 if __name__ == "__main__":
