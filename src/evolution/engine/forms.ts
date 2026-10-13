@@ -274,7 +274,7 @@ const marchForm = composite(
   })),
 );
 
-const humanForm = rigForm((f) => place(humanFront(f, smooth((f - 1910) / 90)), 540, 1600, 1060), 1900,
+const humanForm = rigForm((f) => place(humanFront(f, smooth((f - 1922) / 62)), 540, 1600, 900), 1900,
   L((c, s, v, r) => lk(185 + 30 * Math.abs(v) + (c === 2 ? 10 : 0), 0.85, 0.5 + 0.5 * (Math.abs(v) > 0.85 ? 1 : 0.45 * r), 1.3, 0.72)), 30, { outline: 0.18 });
 
 /** Single organisms, frozen at a flattering frame, for stills such as the cover. */

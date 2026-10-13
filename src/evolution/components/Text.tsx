@@ -70,7 +70,7 @@ const CAPS: Cap[] = [
   { from: 975, to: 1060, tag: "04 / VERTEBRATES", title: "鱼", sub: "一根脊椎，开启了一条新的道路" },
   { from: 1100, to: 1180, tag: "05 / ONTO LAND", title: "登陆", sub: "鳍，慢慢变成了腿" },
   { from: 1215, to: 1410, tag: "06 / MESOZOIC", title: "恐龙时代", sub: "统治地球超过 1.6 亿年" },
-  { from: 1448, to: 1530, tag: "07 / EXTINCTION", title: "一颗小行星", sub: "直径约 10 公里，75% 的物种消失", y: 820, size: 96 },
+  { from: 1466, to: 1534, tag: "07 / EXTINCTION", title: "一颗小行星", sub: "直径约 10 公里，75% 的物种消失", y: 820, size: 96 },
   { from: 1572, to: 1675, tag: "08 / SURVIVORS", title: "幸存者", sub: "一只夜行的小型哺乳动物" },
   { from: 1692, to: 1765, tag: "09 / FEATHERS", title: "恐龙并未完全消失", sub: "它们的后代，就是今天的鸟" },
   { from: 1798, to: 1880, tag: "10 / HOMININS", title: "不是阶梯，是分叉", sub: "700 万年前，我们与黑猩猩分道扬镳" },
@@ -94,7 +94,7 @@ export const Captions: React.FC = () => {
             <div style={{ position: "relative", fontFamily: MONO, fontSize: 18, letterSpacing: "0.45em", paddingLeft: "0.45em", color: "rgba(160,240,255,0.85)",
               transform: `translateY(${(1 - e) * 10}px)` }}>{c.tag}</div>
             <div style={{ position: "relative", marginTop: 14, fontFamily: SANS, fontWeight: 700, fontSize: c.size ?? 74, letterSpacing: `${0.12 + 0.2 * (1 - e)}em`,
-              paddingLeft: "0.12em", lineHeight: 1.1, textShadow: "0 0 30px rgba(110,230,255,0.45), 0 2px 18px rgba(0,0,0,0.6)",
+              paddingLeft: "0.12em", lineHeight: 1.1, textShadow: "0 0 30px rgba(110,230,255,0.45), 0 2px 18px rgba(0,0,0,0.75), 0 0 6px rgba(0,0,0,0.5)",
               filter: `blur(${(1 - e) * 8}px)` }}>{c.title}</div>
             <div style={{ position: "relative", marginTop: 16, fontFamily: SANS, fontWeight: 300, fontSize: 32, letterSpacing: "0.12em", paddingLeft: "0.12em",
               opacity: easeOut(progress(f, c.from + 10, 24)), textShadow: "0 2px 14px rgba(0,0,0,0.7)" }}>{c.sub}</div>

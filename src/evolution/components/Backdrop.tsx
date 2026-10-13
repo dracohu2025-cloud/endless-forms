@@ -78,14 +78,14 @@ const HOMININS = ["地猿", "南方古猿", "能人", "直立人", "智人"];
 const Cladogram: React.FC<{ f: number }> = ({ f }) => {
   const g = easeOut(progress(f, 1812, 52));
   if (g <= 0) return null;
-  const root = { x: 540, y: 1800 };
+  const root = { x: 540, y: 1640 };
   return (
     <svg width={W} height={H} style={{ position: "absolute", inset: 0 }}>
       {MARCH.map((m, k) => {
         const local = clamp(g * 1.6 - k * 0.15);
         if (local <= 0) return null;
-        const midY = lerp(root.y, MARCH_GROUND, 0.45 + 0.08 * k);
-        const d = `M${root.x},${root.y} C${root.x},${midY} ${m.x},${midY + 60} ${m.x},${MARCH_GROUND + 14}`;
+        const midY = lerp(root.y, MARCH_GROUND + 70, 0.4 + 0.08 * k);
+        const d = `M${root.x},${root.y} C${root.x},${midY} ${m.x},${midY + 30} ${m.x},${MARCH_GROUND + 14}`;
         const hue = lerp(28, 190, m.p);
         const alive = k === MARCH.length - 1;
         return (
@@ -93,16 +93,14 @@ const Cladogram: React.FC<{ f: number }> = ({ f }) => {
             <path d={d} pathLength={1} strokeDasharray={`${local} 1`} fill="none" stroke={`hsla(${hue},90%,70%,${alive ? 0.95 : 0.55})`}
               strokeWidth={alive ? 4 : 2.5} style={{ filter: `drop-shadow(0 0 6px hsl(${hue},90%,55%))` }} />
             {!alive && local > 0.95 && <circle cx={m.x} cy={MARCH_GROUND + 14} r={5} fill="none" stroke={`hsla(${hue},80%,70%,0.7)`} strokeWidth={2} />}
-            <text x={m.x} y={MARCH_GROUND + 62} textAnchor="middle" fill={`hsla(${hue},70%,82%,${clamp(local * 3 - 2)})`}
+            <text x={m.x} y={MARCH_GROUND + 52} textAnchor="middle" fill={`hsla(${hue},70%,82%,${clamp(local * 3 - 2)})`}
               fontFamily="'Noto Sans SC'" fontWeight={alive ? 700 : 400} fontSize={alive ? 30 : 24} letterSpacing={2}>{HOMININS[k]}</text>
           </g>
         );
       })}
       <circle cx={root.x} cy={root.y} r={7 + 3 * Math.sin(f * 0.2)} fill="#fff1d6" style={{ filter: "drop-shadow(0 0 10px #ffb070)" }} />
-      <text x={root.x} y={root.y + 50} textAnchor="middle" fill="rgba(255,230,200,0.75)" fontFamily="'JetBrains Mono', 'Noto Sans SC'" fontSize={20} letterSpacing={4}
-        opacity={clamp(g * 2)}>共同祖先 · 700 万年前</text>
-      <text x={root.x} y={root.y + 82} textAnchor="middle" fill="rgba(200,220,240,0.5)" fontFamily="'Noto Sans SC'" fontSize={20} letterSpacing={3}
-        opacity={clamp(g * 2 - 0.6)}>○ 已灭绝的旁支</text>
+      <text x={root.x} y={root.y + 42} textAnchor="middle" fill="rgba(255,230,200,0.75)" fontFamily="'JetBrains Mono', 'Noto Sans SC'" fontSize={20} letterSpacing={4}
+        opacity={clamp(g * 2)}>共同祖先 · 700 万年前  ○ 已灭绝的旁支</text>
     </svg>
   );
 };

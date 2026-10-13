@@ -279,20 +279,21 @@ export function hominin(t: number, p: number, ph = 0): Chain[] {
 
 export function humanFront(t: number, raise: number): Chain[] {
   const br = 1 + 0.025 * Math.sin(t * 0.09);
-  const legs = [-1, 1].map((sx) => seg([[sx * 0.06, -0.5, 0.072], [sx * 0.07, -0.4, 0.062], [sx * 0.078, -0.28, 0.042], [sx * 0.08, -0.17, 0.04], [sx * 0.085, -0.05, 0.026], [sx * 0.1, -0.01, 0.022], [sx * 0.13, 0, 0.016]]));
+  const legs = [-1, 1].map((sx) => seg([[sx * 0.055, -0.49, 0.085], [sx * 0.068, -0.4, 0.066], [sx * 0.078, -0.28, 0.042], [sx * 0.08, -0.17, 0.04], [sx * 0.085, -0.05, 0.026], [sx * 0.1, -0.01, 0.022], [sx * 0.13, 0, 0.016]]));
   const torso = seg([[0, -0.47, 0.105], [0, -0.53, 0.098], [0, -0.6, 0.085], [0, -0.68, 0.1 * br], [0, -0.75, 0.115 * br], [0, -0.8, 0.105], [0, -0.84, 0.04]]);
   const shoulders = seg([[-0.17, -0.795, 0.045], [-0.08, -0.81, 0.05], [0.08, -0.81, 0.05], [0.17, -0.795, 0.045]]);
-  const head = seg([[0, -0.85, 0.035], [0, -0.885, 0.05], [0, -0.92, 0.062], [0, -0.96, 0.058], [0, -0.99, 0.035]]);
-  const a = lerp(0.16, 0.95, raise);
+  const lift = 0.012 * raise;
+  const head = seg([[0, -0.85, 0.035], [0, -0.885 - lift, 0.05], [0, -0.92 - lift, 0.062], [0, -0.96 - lift, 0.058], [0, -0.99 - lift, 0.035]]);
+  const a = lerp(0.16, 2.25, raise) + 0.04 * Math.sin(t * 0.09);
   const arms = [-1, 1].map((sx) => {
-    const ex = sx * 0.17 + sx * 0.27 * Math.sin(a);
-    const ey = -0.79 + 0.27 * Math.cos(a);
-    const a2 = a + lerp(0.04, -0.2, raise);
-    const hx = ex + sx * 0.25 * Math.sin(a2);
-    const hy = ey + 0.25 * Math.cos(a2);
+    const ex = sx * 0.17 + sx * 0.2 * Math.sin(a);
+    const ey = -0.79 + 0.2 * Math.cos(a);
+    const a2 = a + lerp(0.04, 0.35, raise);
+    const hx = ex + sx * 0.18 * Math.sin(a2);
+    const hy = ey + 0.18 * Math.cos(a2);
     const mx = (sx * 0.17 + ex) / 2;
     const my = (-0.79 + ey) / 2;
-    return seg([[sx * 0.17, -0.79, 0.044], [mx, my, 0.038], [ex, ey, 0.03], [(ex + hx) / 2, (ey + hy) / 2, 0.027], [hx, hy, 0.022], [hx + sx * 0.06 * Math.sin(a2), hy + 0.06 * Math.cos(a2), 0.026]]);
+    return seg([[sx * 0.17, -0.79, 0.044], [mx, my, 0.038], [ex, ey, 0.03], [(ex + hx) / 2, (ey + hy) / 2, 0.027], [hx, hy, 0.022], [hx + sx * 0.05 * Math.sin(a2), hy + 0.05 * Math.cos(a2), 0.024]]);
   });
   return [torso, shoulders, head, ...legs, ...arms];
 }
