@@ -147,7 +147,7 @@ const jellyLook = (hue: number) =>
     return lk(hue + 25, 1, 0.75, 1.3, 0.6);
   });
 
-const cambrian = composite([
+const CAMBRIAN_PARTS = [
   { form: rigForm((f) => place(jellyfish(f, 0), 300, 720 - (f - 720) * 0.45, 440), 720, jellyLook(305), 1), w: 22 },
   { form: rigForm((f) => place(jellyfish(f, 2), 820, 1230 - (f - 720) * 0.35, 250), 720, jellyLook(190), 2), w: 9 },
   {
@@ -176,7 +176,8 @@ const cambrian = composite([
     w: 6,
   },
   { form: plankton, w: 20 },
-]);
+];
+const cambrian = composite(CAMBRIAN_PARTS);
 
 const fishLook = L((c, s, v, r) => {
   if (c === 0) return lk(195 + 15 * v, 1, v > 0.4 ? 1 : 0.55 + 0.45 * Math.abs(v), 1.3, 0.75);
@@ -189,14 +190,15 @@ const SCHOOL = Array.from({ length: 14 }, (_, k) => {
   return { dx: (r() - 0.5) * 700, dy: 150 + r() * 600, s: 90 + r() * 70, ph: r() * 6 };
 });
 
-const fishForm = composite([
+const FISH_PARTS = [
   { form: rigForm((f) => place(fish(f), 470 + (f - 930) * 0.9, 1150 - (f - 930) * 1.6, 860, -0.5), 960, fishLook, 7), w: 80 },
   ...SCHOOL.map((q, k) => ({
     form: rigForm((f) => place(fish(f * 1.4, q.ph, 1.4), 460 + q.dx + (f - 930) * 1.1, 1250 + q.dy - (f - 930) * 1.9, q.s, -0.55), 960,
       L((c) => (c === 6 ? lk(60, 0.2, 1, 1.4, 0.9) : lk(175, 1, 0.7, 1.0, 0.6))), 100 + k),
     w: 1.4,
   })),
-]);
+];
+const fishForm = composite(FISH_PARTS);
 
 const tetraForm = rigForm((f) => place(tetrapod(f), 250 + (f - 1070) * 1.5, 1262 - (f - 1070) * 0.08, 720), 1100,
   L((c, s, v, r) => {
@@ -214,11 +216,12 @@ const sauroLook = L((c, s, v, r) => {
 
 const gait = (f: number) => (f - 1200) / 120;
 
-const sauroForm = composite([
+const SAURO_PARTS = [
   { form: rigForm((f) => place(sauropod(f, gait(f)), 330 + (f - 1200) * 0.5, 1420, 620), 1200, sauroLook, 9, { outline: 0.25 }), w: 86 },
   { form: rigForm((f) => place(pterosaur(f, 0), 90 + (f - 1170) * 1.1, 600 + 30 * Math.sin(f * 0.03), 300), 1200, L((c) => lk(12, 1, 0.75, 1.1, 0.7)), 10), w: 8 },
   { form: rigForm((f) => place(pterosaur(f, 1.6), 30 + (f - 1170) * 0.8, 760 + 20 * Math.sin(f * 0.025 + 1), 200), 1200, L((c) => lk(20, 1, 0.6, 1, 0.6)), 11), w: 6 },
-]);
+];
+const sauroForm = composite(SAURO_PARTS);
 
 const mammalLook = L((c, s, v, r) => {
   if (c === 10) return lk(55, 0.2, 1.5, 2.2, 1);
@@ -234,7 +237,7 @@ const mammalForm = rigForm((f) => {
   return place(mammal(f, run, rear), 520 + 40 * run * Math.sin(t * 0.02), 1330, 900);
 }, 1560, mammalLook, 12);
 
-const birdForm = composite([
+const BIRD_PARTS = [
   { form: rigForm((f) => place(mammal(f, 0, 0.45), 300, 1480, 420), 1700, mammalLook, 13), w: 26 },
   {
     form: rigForm((f) => {
@@ -248,7 +251,8 @@ const birdForm = composite([
       }), 14),
     w: 74,
   },
-]);
+];
+const birdForm = composite(BIRD_PARTS);
 
 export const MARCH = [
   { p: 0, s: 380, x: 120 },
@@ -272,6 +276,18 @@ const marchForm = composite(
 
 const humanForm = rigForm((f) => place(humanFront(f, smooth((f - 1910) / 90)), 540, 1600, 1060), 1900,
   L((c, s, v, r) => lk(185 + 30 * Math.abs(v) + (c === 2 ? 10 : 0), 0.85, 0.5 + 0.5 * (Math.abs(v) > 0.85 ? 1 : 0.45 * r), 1.3, 0.72)), 30, { outline: 0.18 });
+
+/** Single organisms, frozen at a flattering frame, for stills such as the cover. */
+export const SPECIMENS: { name: string; age: string; form: Form; f: number }[] = [
+  { name: "细胞", age: "38 亿年前", form: embryoForm, f: 520 },
+  { name: "奇虾", age: "5.2 亿年前", form: CAMBRIAN_PARTS[3].form, f: 820 },
+  { name: "鱼", age: "4.4 亿年前", form: FISH_PARTS[0].form, f: 990 },
+  { name: "四足动物", age: "3.7 亿年前", form: tetraForm, f: 1110 },
+  { name: "恐龙", age: "1.6 亿年前", form: SAURO_PARTS[0].form, f: 1290 },
+  { name: "哺乳动物", age: "6600 万年前", form: mammalForm, f: 1580 },
+  { name: "鸟", age: "6000 万年前", form: BIRD_PARTS[1].form, f: 1712 },
+  { name: "智人", age: "30 万年前", form: humanForm, f: 1990 },
+];
 
 // ---------------------------------------------------------------------------
 // DNA double helix

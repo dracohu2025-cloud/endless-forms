@@ -12,7 +12,8 @@
     "build": "npm run music && npm run render",
     "typecheck": "tsc --noEmit",
     "music:evo": "python3 music/evolution.py",
-    "render:evo": "remotion render src/index.ts Evolution out/evolution.mp4 --codec h264 --crf 18 --concurrency 3"
+    "render:evo": "remotion render src/index.ts Evolution out/evolution.mp4 --codec h264 --crf 18 --concurrency 3",
+    "cover:evo": "remotion still src/index.ts EvoCover-3x4 out/evo_cover_3x4.png && remotion still src/index.ts EvoCover-9x16 out/evo_cover_9x16.png"
   },
   "dependencies": {
     "@remotion/cli": "4.0.535",

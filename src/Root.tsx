@@ -3,6 +3,7 @@ import { Composition } from "remotion";
 import { Cover } from "./Cover";
 import { Europa } from "./Europa";
 import { Evolution } from "./evolution/Evolution";
+import { EvolutionCover } from "./evolution/EvolutionCover";
 import { loadEvolutionFonts } from "./evolution/fonts";
 import { TOTAL_FRAMES as EVO_FRAMES } from "./evolution/timeline";
 import { loadFonts } from "./fonts";
@@ -19,6 +20,10 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="Cover-3x4" component={Cover} durationInFrames={TOTAL_FRAMES} fps={FPS} width={W} height={1440}
       defaultProps={{ tall: false }} />
     <Composition id="Cover-9x16" component={Cover} durationInFrames={TOTAL_FRAMES} fps={FPS} width={W} height={H}
+      defaultProps={{ tall: true }} />
+    <Composition id="EvoCover-3x4" component={EvolutionCover} durationInFrames={EVO_FRAMES} fps={FPS} width={W} height={1440}
+      defaultProps={{ tall: false }} />
+    <Composition id="EvoCover-9x16" component={EvolutionCover} durationInFrames={EVO_FRAMES} fps={FPS} width={W} height={H}
       defaultProps={{ tall: true }} />
   </>
 );

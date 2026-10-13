@@ -10,7 +10,7 @@ import { H, W } from "../timeline";
 const sprites = new Map<number, HTMLCanvasElement>();
 const SPR = 48;
 
-const sprite = (hue: number, sat: number) => {
+export const sprite = (hue: number, sat: number) => {
   const hq = ((Math.round(hue / 6) * 6) % 360 + 360) % 360;
   const sq = sat < 0.3 ? 0 : sat < 0.75 ? 1 : 2;
   const key = hq * 3 + sq;

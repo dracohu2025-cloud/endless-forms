@@ -9,7 +9,7 @@ import { W } from "../timeline";
 
 const START = 2250;
 
-export const TreeOfLife: React.FC = () => {
+export const TreeOfLife: React.FC<{ bare?: boolean }> = ({ bare = false }) => {
   const f = useCurrentFrame();
   const vis = envelope(f, START, 20, 2600, 50);
   if (vis <= 0) return null;
@@ -56,7 +56,7 @@ export const TreeOfLife: React.FC = () => {
           ctx.beginPath();
           ctx.arc(TREE_CX, TREE_CY, 60, 0, Math.PI * 2);
           ctx.fill();
-          if (tag > 0) {
+          if (tag > 0 && !bare) {
             ctx.strokeStyle = `rgba(255,236,170,${0.9 * tag})`;
             ctx.lineWidth = 2;
             const pr = 14 + 10 * Math.sin(f * 0.15);
@@ -70,7 +70,7 @@ export const TreeOfLife: React.FC = () => {
           }
         }}
       />
-      {DOMAINS.map((d, i) => {
+      {!bare && DOMAINS.map((d, i) => {
         const span = TREE.leaves.filter((l) => l.domain === i);
         const a = span.reduce((s, l) => s + l.a, 0) / span.length;
         const [x, y] = polar(a, TREE_R + 80, rot);
@@ -82,14 +82,14 @@ export const TreeOfLife: React.FC = () => {
           </div>
         );
       })}
-      <div style={{ position: "absolute", left: Math.max(20, Math.min(W - 280, lx - 130)), top: ly + 8, width: 260, textAlign: "center", opacity: tag, transform: `translateY(${(1 - tag) * 10}px)` }}>
+      {!bare && <div style={{ position: "absolute", left: Math.max(20, Math.min(W - 280, lx - 130)), top: ly + 8, width: 260, textAlign: "center", opacity: tag, transform: `translateY(${(1 - tag) * 10}px)` }}>
         <div style={{ fontFamily: SANS, fontWeight: 700, fontSize: 40, color: "#fff1c0", letterSpacing: "0.12em", textShadow: "0 0 18px rgba(255,220,140,0.8)" }}>你在这里</div>
         <div style={{ fontFamily: MONO, fontSize: 18, color: "rgba(255,236,190,0.85)", letterSpacing: "0.25em" }}>YOU ARE HERE</div>
-      </div>
-      <div style={{ position: "absolute", left: 0, width: W, top: TREE_CY + 70, textAlign: "center", opacity: easeOut(progress(f, 2290, 30)) }}>
+      </div>}
+      {!bare && <div style={{ position: "absolute", left: 0, width: W, top: TREE_CY + 70, textAlign: "center", opacity: easeOut(progress(f, 2290, 30)) }}>
         <div style={{ fontFamily: MONO, fontSize: 20, letterSpacing: "0.3em", color: "rgba(220,250,255,0.85)" }}>LUCA</div>
         <div style={{ fontFamily: SANS, fontSize: 22, fontWeight: 300, letterSpacing: "0.2em", color: "rgba(220,250,255,0.7)" }}>最后的共同祖先</div>
-      </div>
+      </div>}
     </AbsoluteFill>
   );
 };

@@ -35,6 +35,7 @@
 ```bash
 npm run music:evo    # 进化旋律 + 合成配乐 → public/evolution.wav + src/evolution/data/audio.json
 npm run render:evo   # 导出 out/evolution.mp4
+npm run cover:evo    # 封面 out/evo_cover_3x4.png / out/evo_cover_9x16.png：冻结的生命之树 + 八个粒子物种
 node scripts/stills.mjs Evolution 300 1260 2500   # 静帧检查
 ```
 
