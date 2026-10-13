@@ -24,6 +24,33 @@
 
 顶部有一条贯穿全片的时间轴，年份随剧情滚动（公元前 800 年 → 2026 年）。
 
+## 第二部：ENDLESS FORMS · 进化论（40 亿年 · 92 秒）
+
+`src/evolution/` 是另一支 9:16 短片，同样 100% 由代码生成，但思路完全不同：
+
+- **一个粒子群演完整部生命史**：6400 个发光粒子从原始汤出发，依次变形为第一个细胞、卵裂胚胎（1 → 64 个细胞，每次分裂都卡在配乐的“分裂音”上）、寒武纪动物、鱼、登陆的四足动物、蜥脚类恐龙、哺乳动物、鸟、人族、智人、DNA 双螺旋，最后坍缩为一棵按时间校准的环形生命之树。生物都是由“胶囊骨架”绑定的粒子，骨架本身在游泳、行走、扇翅。
+- **BGM 的主旋律是“进化”出来的**：`music/evolution.py` 用遗传算法（道金斯“黄鼠狼程序”式的累积选择）从随机音符开始进化一段 32 音的旋律。前 32 小节里每两小节播放一次当代最优个体，旋律从杂乱一步步收敛成型；屏幕右上角的 HUD 实时显示代数、基因序列和适应度。
+- **音画同步**：120 BPM，1 小节 = 60 帧；细胞分裂、恐龙脚步、小行星撞击、鸟鸣都是配乐导出的事件，驱动画面。
+
+```bash
+npm run music:evo    # 进化旋律 + 合成配乐 → public/evolution.wav + src/evolution/data/audio.json
+npm run render:evo   # 导出 out/evolution.mp4
+node scripts/stills.mjs Evolution 300 1260 2500   # 静帧检查
+```
+
+| 时间 | 段落 |
+| --- | --- |
+| 0:00 | 原始汤，标题文字以“累积选择”方式进化成形 |
+| 0:08 | 第一个细胞 → 卵裂 → 球形群体 |
+| 0:24 | 寒武纪大爆发（水母、菊石、奇虾、三叶虫） |
+| 0:32 | 鱼 → 穿出水面，登陆 |
+| 0:40 | 恐龙时代 → 小行星撞击 |
+| 0:52 | 夜行哺乳动物、鸟 |
+| 1:00 | 人族：不是阶梯，是分叉 → 智人 |
+| 1:08 | DNA 四个字母 |
+| 1:16 | 生命之树：你在这里 |
+| 1:26 | 达尔文《物种起源》结语，片尾 |
+
 ## 本地运行
 
 需要 Node 18+、Python 3.10+、ffmpeg。
@@ -58,6 +85,8 @@ src/timeline.ts         小节/帧换算与段落表
 src/scenes/*.tsx        十个场景
 src/components/         标题排版、粒子、时间轴、胶片颗粒、闪白、镜头容器
 src/lib/audio.ts        读取配乐分析数据，提供响度/鼓点脉冲
+music/evolution.py      进化论 BGM：遗传算法旋律 + 合成与混音
+src/evolution/          进化论短片：engine/（粒子骨架绑定、生物、胚胎、生命之树）、components/（粒子渲染、背景、HUD、文字）
 scripts/                地理数据、字体子集化、静帧预览
-public/fonts/           子集化后的 Noto Serif SC、Cinzel、Cormorant Garamond（OFL 授权）
+public/fonts/           子集化后的 Noto Serif SC、Noto Sans SC、Cinzel、Cormorant Garamond、Unbounded、JetBrains Mono（OFL 授权）
 ```
