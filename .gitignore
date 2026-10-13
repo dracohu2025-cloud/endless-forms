@@ -1,0 +1,7 @@
+node_modules/
+out/
+.netlify
+.DS_Store
+__pycache__/
+assets-src/
+public/bgm.wav
