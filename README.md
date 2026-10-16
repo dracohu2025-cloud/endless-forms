@@ -6,6 +6,23 @@
 - **配乐**：`music/compose.py` 用 numpy/scipy 从正弦波、锯齿波开始合成一整首管弦乐，终章引用贝多芬《欢乐颂》（公有领域）
 - **音画同步**：配乐固定 120 BPM，1 小节 = 2 秒 = 60 帧；合成器同时导出逐帧响度与鼓点时间表，画面的光晕、震屏、闪白、星星出现时机都由它驱动
 
+## 成品（`media/`）
+
+无需安装任何东西，可以直接下载发布：
+
+| 文件 | 说明 |
+| --- | --- |
+| `media/europa/europa_civilization_9x16.mp4` | 《欧洲文明史》成片，1080×1920 · 30fps · H.264 + AAC |
+| `media/europa/europa_cover_3x4.(png\|jpg)` | 小红书封面 1080×1440 |
+| `media/europa/europa_cover_9x16.(png\|jpg)` | 视频号封面 1080×1920 |
+| `media/europa/europa_bgm.wav` | 配乐原声（44.1 kHz 立体声） |
+| `media/evolution/evolution_endless_forms_9x16.mp4` | 《进化论》成片，1080×1920 · 30fps · H.264 + AAC |
+| `media/evolution/evolution_cover_3x4.(png\|jpg)` | 小红书封面 1080×1440 |
+| `media/evolution/evolution_cover_9x16.(png\|jpg)` | 视频号封面 1080×1920 |
+| `media/evolution/evolution_bgm.wav` | 配乐原声（旋律由遗传算法进化而成） |
+
+这些文件都可以用下文的命令从源码重新生成（配乐合成是确定性的，每次生成结果完全一致）。
+
 ## 分镜
 
 | 时间 | 段落 | 画面 | 音乐 |
